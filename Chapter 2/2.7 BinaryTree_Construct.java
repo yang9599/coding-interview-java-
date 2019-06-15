@@ -1,4 +1,4 @@
-// 树节点的结果
+// 树节点的结构
 public class TreeNode {
 	int val;
 	TreeNode left;
