@@ -13,7 +13,7 @@ public class array_duplicate {
 		}
 		return(set.toArray());
 	}
-	public static void main(String[] arg) {
+	public static void main(String[] args) {
 		Object[] arr = {2,5,1,3,4};
 		Object[] arr_duplicate = duplicate(arr);
 		if(arr.length == arr_duplicate.length)
