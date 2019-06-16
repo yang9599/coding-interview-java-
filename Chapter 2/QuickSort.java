@@ -31,6 +31,7 @@ public class QuickSort {
 		System.out.println("请输入数组数字：");
 		for(int i=0; i<m; i++)
 			arr[i] = scan.nextInt();
+		scan.close();
 		int[] arr_sort = quickSort(arr, 0, m-1);
 		System.out.println("排序后结果为：");
 		for(int j=0; j<m; j++)
