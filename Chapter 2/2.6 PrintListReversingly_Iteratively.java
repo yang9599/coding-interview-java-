@@ -46,6 +46,7 @@ public class PrintListReversingly_Iteratively {
 			p.next = q;
 			p = p.next;
 		}
+		scan.close();
 		p.next = null;
 		printList(pHead);
 	}
