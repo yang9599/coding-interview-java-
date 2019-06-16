@@ -68,7 +68,7 @@ public class Fibonacci {
 	
 	public static void main(String[] args) {
 		System.out.println("请输入一个整数：");
-		scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		while(true) {
 			int n = scan.nextInt();
 			if(n==0)
@@ -80,5 +80,6 @@ public class Fibonacci {
 				System.out.println(matrix[0][1]);
 			}
 		}
+		scan.close();
 	}
 }
