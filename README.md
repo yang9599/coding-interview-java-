@@ -4,7 +4,7 @@
 
 ### 第二章
 
-[面试题2：实现Singleton模式](Chapter 2/2.2 Singleton.java)
+[实现Singleton模式](Chapter 2/2.2 Singleton.java)
 
 面试题3：数组中重复的数字
 
