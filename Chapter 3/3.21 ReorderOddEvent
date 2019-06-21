@@ -1,0 +1,28 @@
+public class ReorderOddEvent {
+	public static void reorder(int[] data) {
+		if(data == null)
+			return;
+		int first = 0;
+		int last = data.length-1;
+		while(first < last) {
+			while(first<last && (data[first]&0x1)!=0)
+				first++;
+			while(first<last && (data[last]&0x1)==0)
+				last--;
+			if(first<last) {
+				int temp = data[first];
+				data[first] = data[last];
+				data[last] = temp;
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		int[] data = {1,5,6,8,7,3,6,4,5};
+		reorder(data);
+		for(int i=0; i<data.length; i++)
+			System.out.print(data[i]+" ");
+	}
+
+}
