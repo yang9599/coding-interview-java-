@@ -1,3 +1,13 @@
+class ListNode {
+	int val;
+	ListNode next = null;
+	ListNode(){
+		
+	}
+	ListNode(int val) {
+		this.val = val;
+	}
+}
 
 public class EntryNodeOfLoop {
 	public ListNode meeting(ListNode pHead) {
