@@ -134,7 +134,30 @@
 		return stack2.peek();
 	}
 ```
+
 ### 面试题31
+> #### 题目：栈的压入、弹出序列
+> #### 思路：用栈来压入弹出元素，相等则出栈。
+```java
+	public boolean IsPopOrder(int[] pushA, int[] popA) {
+		if(pushA == null || popA == null)
+			return false;
+		Stack<Integer> stack = new Stack<Integer>();
+		int index = 0;
+		
+		for(int i=0; i<pushA.length; i++) {
+			stack.push(pushA[i]);
+			while(!stack.isEmpty() && stack.peek() == popA[index]) {
+				stack.pop();
+				index++;
+			}
+		}
+		return stack.isEmpty();
+		
+	}
+```
+
+### 面试题32
 > #### 题目：从上到下打印二叉树
 > #### 思路：利用队列和链表辅助，存储一些节点
 ```java
