@@ -134,3 +134,26 @@
 		return stack2.peek();
 	}
 ```
+### 面试题3
+> #### 题目：从上到下打印二叉树
+> #### 思路：利用队列和链表辅助，存储一些节点
+```java
+	public ArrayList<Integer> PrintFromTopToBottom(BinaryTreeNode root){
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		if(root == null)
+			return list;
+		LinkedList<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			BinaryTreeNode node = queue.poll();
+			list.add(node.m_dbValue);
+			if(node.m_pLeft != null) {
+				queue.addLast(node.m_pLeft);
+			}
+			if(node.m_pRight != null)
+				queue.addLast(node.m_pRight);
+		}
+		return list;
+	}
+```
