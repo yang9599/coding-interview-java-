@@ -6,6 +6,8 @@
 
 面试题2：实现Singleton模式
 
+[使用Python实现单例模式](./Chapter 2/2.2 Singleton.java)
+
 面试题3：数组中重复的数字
 
 面试题4：二维数组中的查找
