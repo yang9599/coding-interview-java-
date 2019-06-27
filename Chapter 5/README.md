@@ -109,3 +109,25 @@
 		}
 	}
 ```
+### 面试题42
+> #### 题目：连续子数组的最大和
+> #### 思路：如果加到一个负数，看是否加负数后的下一个的和比没有加负数前的和大，如果更大，则继续加。
+```java
+	public int FindGreatestSumOfSubArray(int[] pData) {
+		if(pData==null || pData.length<=0)
+			return -9999;
+		int cur = pData[0];
+		int greate = pData[0];
+		for(int i=1; i<pData.length; i++) {
+			if(cur < 0)
+				cur = pData[i];
+			else {
+				cur += pData[i];
+			}
+			if(cur > greate)
+				greate = cur;
+		}
+		return greate;
+		
+	}
+```
