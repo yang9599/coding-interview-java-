@@ -296,3 +296,98 @@
 		return ReconnectNodes(pHead);
 	}
 ```
+### 面试题36
+> #### 题目：二叉搜索树与双向链表
+> #### 思路：定义一个链表的尾节点，递归处理左右子树，最后返回链表的头节点
+```java
+	public BinaryTreeNode Convert(BinaryTreeNode pRootOfTree) {
+		BinaryTreeNode lastlist = ConvertNode(pRootOfTree, null);
+		BinaryTreeNode pHead = lastlist;
+		while(pHead!=null && pHead.m_pLeft!=null)
+			pHead = pHead.m_pLeft;
+		return pHead;
+	}
+	public BinaryTreeNode ConvertNode(BinaryTreeNode root, BinaryTreeNode lastlist) {
+		if(root == null)
+			return null;
+		BinaryTreeNode cur = root;
+		if(cur.m_pLeft != null) {
+			lastlist = ConvertNode(cur.m_pLeft, lastlist);
+		}
+		cur.m_pLeft = lastlist;
+		if(lastlist != null)
+			lastlist.m_pRight = cur;
+		lastlist = cur;
+		if(cur.m_pRight != null)
+			lastlist = ConvertNode(cur.m_pRight, lastlist);
+		return lastlist;
+	}
+```
+### 面试题37
+> #### 题目：序列化二叉树
+> #### 思路：序列化：前序遍历二叉树存入字符串中；反序列化：根据前序遍历重建二叉树。
+```java
+	public String Serialize(BinaryTreeNode root) {
+		StringBuffer sb = new StringBuffer();
+		if(root == null) {
+			sb.append("$,");
+			return sb.toString();
+		}
+		sb.append(root.m_dbValue+",");
+		sb.append(Serialize(root.m_pLeft));
+		sb.append(Serialize(root.m_pRight));
+		return sb.toString();
+	}
+	public int index = -1;
+	public BinaryTreeNode Deserialize(String str) {
+		index++;
+		int len = str.length();
+		String[] s = str.split(",");
+		BinaryTreeNode node = null;
+		
+		if(index >= len)
+			return null;
+		if(!s[index].equals("$")) {
+			node = new BinaryTreeNode(Integer.valueOf(s[index]));
+			node.m_pLeft = Deserialize(str);
+			node.m_pRight = Deserialize(str);
+		}
+		return node;
+	}
+```
+### 面试题38
+> #### 题目：字符串的排列
+> #### 思路：用递归拿第一个字符和后面的字符逐个交换
+````java
+	public ArrayList<String> Permutation(char[] str) {
+		ArrayList<String> result = new ArrayList<String>();
+		if(str==null)
+			return result;
+		TreeSet<String> temp = new TreeSet<String>();
+		Permutation(str,0,temp);
+		result.addAll(temp);
+		return result;
+		
+	}
+	public void Permutation(char[] str, int index, TreeSet<String> result) {
+		if(str==null || str.length==0)
+			return;
+		if(index<0 || index>str.length-1)
+			return;
+		if(index == str.length-1)
+			result.add(String.valueOf(str));
+		else {
+			for(int i=index; i<=str.length-1; i++) {
+				swap(str, index, i);
+				Permutation(str, index+1, result);
+				//回退
+				swap(str, index, i);
+			}
+		}
+	}
+	public void swap(char[] c, int a, int b) {
+		char temp = c[a];
+		c[a] = c[b];
+		c[b] = temp;
+	}
+````
