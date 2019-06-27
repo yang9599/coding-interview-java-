@@ -76,3 +76,36 @@
 		}
 	}
 ```
+### 面试题41
+> #### 题目：数据流中的中位数
+> #### 思路：创建优先级队列维护大顶堆和小顶堆两个堆，并且小顶堆的值都大于大顶堆的值，2个堆个数的差值小于等于1，所以当插入个数为奇数时：大顶堆个数就比小顶堆多1，中位数就是大顶堆堆头；当插入个数为偶数时，使大顶堆个数跟小顶堆个数一样，中位数就是 2个堆堆头平均数。也可使用集合类的排序方法。
+```java
+	int count = 0;
+	PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
+	PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(16, new Comparator<Integer>() { 
+		public int compare(Integer o1, Integer o2){
+			return o2.compareTo(o1);
+		}
+	});
+	public void Insert(Integer num) {
+		count++;
+		//当数据的数目为奇数时，进入大根堆
+		if((count&1) == 1) {
+			minHeap.offer(num);
+			maxHeap.offer(minHeap.poll());
+		}
+		else {
+			maxHeap.offer(num);
+			minHeap.offer(maxHeap.poll());
+		}
+	}
+	public Double GetMedian() {
+		if(count == 0)
+			return null;
+		if((count&1)==1)
+			return Double.valueOf(maxHeap.peek());
+		else {
+			return Double.valueOf((minHeap.peek()+maxHeap.peek()))/2;
+		}
+	}
+```
