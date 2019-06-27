@@ -56,4 +56,4 @@
 
 面试题26：树的子结构
 
-
+部分内容参考：https://blog.csdn.net/baiye_xing/article/details/78428561
