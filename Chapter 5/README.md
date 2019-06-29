@@ -190,3 +190,27 @@
 		return (int)(Math.pow(10, digits-1));
 	}
 ```
+### 面试题45
+> #### 题目：把数组排成最小的数
+> #### 思路：先将整型数组转换成String数组，然后将String数组排序，最后将排好序的字符串数组拼接出来。
+```java
+	public String PrintMinNumber(int[] numbers) {
+		if(numbers==null || numbers.length==0)
+			return "";
+		int len = numbers.length;
+		String[] str = new String[len];
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<len; i++)
+			str[i] = String.valueOf(numbers[i]);
+		Arrays.sort(str, new Comparator<String>() {
+			public int compare(String str1, String str2) {
+				String c1 = str1 + str2;
+				String c2 = str2 + str1;
+				return c1.compareTo(c2);
+			}
+		});
+		for(int i=0; i<len; i++)
+			sb.append(str[i]);
+		return sb.toString();
+	}
+```
