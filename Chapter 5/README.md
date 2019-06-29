@@ -131,3 +131,26 @@
 		
 	}
 ```
+### 面试题43
+> #### 题目：1~n整数中1出现的次数
+> #### 思路：考虑将n的十进制的每一位单独拿出讨论，每一位的值记为weight。从1到n，每增加1，weight就会加1，当weight加到9时，再加1又会回到0重新开始。
+```java
+	public int NumberOf1Between1AndN(int n) {
+		if(n <= 0)
+			return -9999;
+		int count = 0;
+		int base = 1;
+		int round = n;
+		while(round > 0) {
+			int weight = round % 10;
+			round /= 10;
+			count += round * base;
+			if(weight == 1)
+				count += (n%base)+1;
+			else if(weight > 1)
+				count += base;
+			base *= 10;
+		}
+		return count;
+	}
+```
