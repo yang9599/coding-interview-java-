@@ -176,3 +176,27 @@
 		return result;	
 	}
 ```
+### 面试题57
+> #### 题目1：和为s的数字
+> #### 思路：前后一个指针，如果前后两个指针对应的数字之和大于s，则后指针向前移动，否则前指针往后移动。
+```java
+	public static boolean FindNumbersWithSum(int[] data, int sum, int[] num1, int[] num2) {
+		int length = data.length;
+		if(data==null || length<=0 || sum<data[0])
+			return false;
+		int end = length-1;
+		int start = 0;
+		while(start <= end) {
+			if(data[start]+data[end] > sum)
+				end--;
+			else if(data[start]+data[end] < sum)
+				start++;
+			else {
+				num1[0] = data[start];
+				num2[0] = data[end];
+				return true;
+			}
+		}
+		return false;
+	}
+```
