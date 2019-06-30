@@ -403,3 +403,21 @@
 		return false;
 	}
 ```
+### 面试题62
+> #### 题目：圆圈中最后剩下的数字
+> #### 思路：用链表模拟圆圈
+```java
+	public int LastRemaining(int n, int m) {
+		if(n<1 || m<1)
+			return -1;
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		int bt = 0;
+		for(int i=0; i<n; i++)
+			list.add(i);
+		while(list.size()>1) {
+			bt = (bt+m+1) % list.size();
+			list.remove(bt);
+		}
+		return list.size()==1?list.get(0):-1;
+	}
+```
