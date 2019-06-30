@@ -268,3 +268,70 @@
 		return String.valueOf(sb);
 	}
 ```
+### 面试题59
+> #### 题目1：滑动窗口的最大值
+> #### 思路：利用一个双端队列来存储当前队列里的最大值以及之后可能的最大值。
+```java
+	public ArrayList<Integer> maxInWindows(int[] num, int size){
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		if(num == null)
+			return arr;
+		if(num.length<size || size<=0)
+			return arr;
+		Deque<Integer> queue = new LinkedList<Integer>();
+		for(int i=0; i<num.length; i++) {
+			while(!queue.isEmpty() && num[i]>=num[queue.getLast()])
+				queue.pollLast();
+			while(!queue.isEmpty() && queue.getFirst()<i-(size-1))
+				queue.pollFirst();
+			queue.offerLast(i);
+			if(i+1 >= size)
+				arr.add(num[queue.getFirst()]);
+		}
+		return arr;
+	}
+```
+> #### 题目2：队列的最大值
+> #### 思路：除了定义一个队列data存储数值，还需额外用一个队列maxmium存储可能的最大值；此外，还要定义一个数据结构，用于存放数据以及当前的index值，用于删除操作时确定是否删除maxmium中最大值。
+```java
+	private ArrayDeque<InternalData>  data = new ArrayDeque<InternalData>();
+	private ArrayDeque<InternalData> maximum = new ArrayDeque<InternalData>();
+	private class InternalData{
+		int number;
+		int index;
+		public InternalData(int number,int index) {
+			this.number=number;
+			this.index=index;
+		}
+	}
+	private int curIndex;
+	
+	public void push_back(int number) {
+		InternalData curData = new InternalData(number,curIndex);
+		data.addLast(curData);
+		
+		while(!maximum.isEmpty() && maximum.getLast().number<number)
+			maximum.removeLast();
+		maximum.addLast(curData);
+		
+		curIndex++;
+	}
+	
+	public void pop_front() {
+		if(data.isEmpty()) {
+			System.out.println("队列为空，无法删除！");
+			return;
+		}
+		InternalData curData = data.removeFirst();
+		if(curData.index==maximum.getFirst().index)
+			maximum.removeFirst();
+	}
+	
+	public int max() {
+		if(maximum==null){
+			System.out.println("队列为空，无法删除！");
+			return 0;
+		}
+		return maximum.getFirst().number;
+	}
+```
