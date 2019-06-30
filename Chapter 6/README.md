@@ -468,7 +468,7 @@
 > #### 题目：构建乘积数组
 > #### 思路：矩阵求解
 ```java
-    public static int[] multiply2(int[] array) {
+    public static int[] multiply(int[] array) {
         if (array == null) {
             return null;
         }
