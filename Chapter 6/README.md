@@ -177,7 +177,7 @@
 	}
 ```
 ### 面试题57
-> #### 题目1：和为s的数字
+> #### 题目1：和为s的两个数字
 > #### 思路：前后一个指针，如果前后两个指针对应的数字之和大于s，则后指针向前移动，否则前指针往后移动。
 ```java
 	public static boolean FindNumbersWithSum(int[] data, int sum, int[] num1, int[] num2) {
@@ -198,5 +198,36 @@
 			}
 		}
 		return false;
+	}
+```
+> #### 题目2：和为s的连续正数序列
+> #### 思路：首先定义一个small为1，big为2.如果从small到big的序列的和大于s，则增大small的值。如果小于s，则可以减小big的值
+```java
+	public static void FindContinuousSequence(int sum) {
+		if(sum < 3)
+			return;
+		int small = 1;
+		int big = 2;
+		int middle = (1+sum)/2;
+		int curSum = small + big;
+		while(small < middle) {
+			if(curSum == sum)
+				PrintContinuousSequence(sum, small, big);
+			while(curSum>sum && small<middle) {
+				curSum -= small;
+				small++;
+				if(curSum == sum)
+					PrintContinuousSequence(sum, small, big);
+			}
+			big++;
+			curSum += big;
+		}
+	}
+	public static void PrintContinuousSequence(Integer sum, int small, int big) {
+		for(int i=small; i<big; i++) {
+			System.out.print(String.valueOf(i)+"+");
+		}
+		System.out.print(String.valueOf(big)+"="+String.valueOf(sum));
+		System.out.println();
 	}
 ```
