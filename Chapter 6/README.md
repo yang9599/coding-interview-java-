@@ -255,3 +255,16 @@
 		return String.valueOf(sb);
 	}
 ```
+> #### 题目2：左旋转字符串
+> #### 思路：利用一个StringBuilder存储后面的字符串，再append前面的字符串。
+```java
+	public static String leftRotateString(String str, int n) {
+		StringBuilder sb = new StringBuilder();
+		for(int i=n; i<str.length(); i++) {
+			sb.append(str.charAt(i));
+		}
+		for(int i=0; i<n; i++)
+			sb.append(str.charAt(i));
+		return String.valueOf(sb);
+	}
+```
