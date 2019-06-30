@@ -440,3 +440,52 @@ public class NumberToString {
 		return left+right+count;
 	}
 ```
+### 面试题52
+> #### 题目：两个链表的第一个公共节点
+> #### 思路：分别遍历一下两个链表，统计两个链表长度。然后让长链表先走长出来的长度，之后两个链表同时遍历，直到找到相同的节点。
+```java
+	class ListNode{
+		int val;
+		ListNode next = null;
+		public ListNode() {
+			// TODO Auto-generated constructor stub
+		}
+		public ListNode(int val) {
+			this.val = val;
+		}
+	}
+	public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+		if(pHead1==null || pHead2==null)
+			return null;
+		ListNode node1 = pHead1;
+		ListNode node2 = pHead2;
+		int length1 = 0, length2 = 0;
+		while(node1 != null) {
+			length1 += 1;
+			node1 = node1.next;
+		}
+		while(node2 != null) {
+			length2 += 1;
+			node2 = node2.next;
+		}
+		if(length1 > length2) {
+			int k = length1-length2;
+			while(k != 0) {
+				pHead1 = pHead1.next;
+				k--;
+			}
+		}
+		else {
+			int k = length2 - length1;
+			while(k != 0) {
+				pHead2 = pHead2.next;
+				k--;
+			}
+		}
+		while(pHead1 != pHead2) {
+			pHead1 = pHead1.next;
+			pHead2 = pHead2.next;
+		}
+		return pHead1;
+	}
+```
