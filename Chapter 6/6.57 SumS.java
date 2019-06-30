@@ -20,7 +20,7 @@ public class SumS {
 		}
 		return false;
 	}
-	//和为s的连续证书序列
+	//和为s的连续整数序列
 	public static void FindContinuousSequence(int sum) {
 		if(sum < 3)
 			return;
