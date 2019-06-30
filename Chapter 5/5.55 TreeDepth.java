@@ -28,6 +28,7 @@ public class DepthOfBinaryTree {
 		int nRight = TreeDepth(pRoot.m_pRight);
 		return (nLeft>nRight)?(nLeft+1):(nRight+1);
 	}
+	//是否为平衡二叉树
 	public boolean IsBalanced(BinaryTreeNode pRoot) {
 		if(pRoot==null || (pRoot.m_pLeft==null && pRoot.m_pRight==null))
 			return true;
