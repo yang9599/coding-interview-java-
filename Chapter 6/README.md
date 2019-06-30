@@ -231,3 +231,27 @@
 		System.out.println();
 	}
 ```
+### 面试题58
+> #### 题目1：翻转单词顺序
+> #### 思路：第一步翻转句子中所有的字符，第二部再翻转每个单词中字符的顺序
+```java
+	public static String Reverse(String str) {
+		StringBuilder sb = new StringBuilder();
+		for(int i=str.length()-1; i>=0; i--)
+			sb.append(str.charAt(i));
+		return String.valueOf(sb);
+	}
+	public static String ReverseSentence(String str) {
+		if(str==null || str.length()==0)
+			return str;
+		if(str.trim().length() == 0)
+			return str;
+		StringBuilder sb = new StringBuilder();
+		String re = Reverse(str);
+		String[] s = re.split(" ");
+		for(int i=0; i<s.length-1;i++)
+			sb.append(Reverse(s[i])+" ");
+		sb.append(Reverse(s[s.length-1]));
+		return String.valueOf(sb);
+	}
+```
