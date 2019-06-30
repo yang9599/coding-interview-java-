@@ -441,3 +441,13 @@
 		return maxDiff;
 	}
 ```
+### 面试题64
+> #### 题目：求1+2+...+n
+> #### 思路：递归
+```java
+	public static int SumN(int n) {
+		int sum = n;
+		boolean result = (n>0) && ((sum+=SumN(n-1))>0);
+		return sum;
+	}
+```
