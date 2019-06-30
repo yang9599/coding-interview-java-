@@ -555,3 +555,26 @@ public class NumberToString {
 		return -1;
 	}
 ```
+### 面试题53
+> #### 题目：二叉搜索树的第K大节点
+> #### 思路：中序遍历
+```java
+	public BinaryTreeNode KthNode(BinaryTreeNode pRoot, int k) {
+		if(pRoot==null || k==0)
+			return null;
+		return KthNodeCore(pRoot, k);
+	}
+	public BinaryTreeNode KthNodeCore(BinaryTreeNode pRoot, int k) {
+		BinaryTreeNode target = null;
+		if(pRoot.m_pLeft != null)
+			target = KthNodeCore(pRoot.m_pLeft, k);
+		if(target == null) {
+			if(k==1)
+				target = pRoot;
+			k--;
+		}
+		if(target==null && pRoot.m_pRight!=null)
+			target = KthNodeCore(pRoot.m_pRight, k);
+		return target;
+	}
+```
