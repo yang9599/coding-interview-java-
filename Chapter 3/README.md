@@ -179,3 +179,157 @@
 		 return false;
 	}
 ```
+### 面试题20
+> #### 题目：表示数值的字符串
+> #### 思路：数字的格式可以用A[.[B]][e|EC]或者.B[e|EC]表示，其中A和C都是整数（可以用正负号，也可以没有），而B是一个无符号的整数
+```java
+	public static boolean isNumeric(char[] str) {
+		if(str == null)
+			return false;
+		int index = 0;
+		int ecount = 0;
+		int point = 0;
+		//第一个字符是正负号就直接跳过
+		if(str[0]=='-' || str[0]=='+')
+			index++;
+		for(int i=index; i<str.length; i++) {
+			//遍历的字符是正负号，那么如果前面一个字符不是e或者E，那么就不是数值
+			if(str[i]=='-' || str[i]=='+') {
+				if(str[i-1]!='e' && str[i-1]!='E')
+					return false;
+				continue;
+			}
+			if(str[i]=='e' || str[i]=='E') {
+				ecount++;
+				if(ecount>1)
+					return false;
+				//阿拉伯数字的0~9对应的ASCII码是从48到57
+				if(i==0 || str[i-1]<48 || str[i-1]>57 || i==str.length-1)
+					return false;
+				point++;
+				continue;
+			}
+			if(str[i]=='.') {
+				point++;
+				if(point > 1)
+					return false;
+				continue;
+			}
+			if((str[i]<48 || str[i]>57) && (str[i]!='e') && (str[i]!='E'))
+				return false;
+		}
+		return true;
+	}
+```
+### 面试题21
+> #### 题目：调整数组顺序使奇数位于偶数前面
+> #### 思路：前后两个指针，前指针遇到的偶数和后指针遇到的奇数直接调换位置
+```java
+	public static void reorder(int[] data) {
+		if(data == null)
+			return;
+		int first = 0;
+		int last = data.length-1;
+		while(first < last) {
+			while(first<last && (data[first]&0x1)!=0)
+				first++;
+			while(first<last && (data[last]&0x1)==0)
+				last--;
+			if(first<last) {
+				int temp = data[first];
+				data[first] = data[last];
+				data[last] = temp;
+			}
+		}
+		
+	}
+```
+### 面试题22
+> #### 题目：链表中倒数第k个节点
+> #### 思路：在头节点定义两个指针，第一个指针从先走k-1步后，两个指针一起走，这样两个指针相差k-1，当第一个指针到达尾节点时，第二个指针正好指向倒数第k个节点
+```java
+	public ListNode find(ListNode head, int k) {
+		if(head == null || k <= 0)
+			return null;
+		ListNode fast = head;
+		ListNode slow = head;
+		while(k-- > 1) {
+			if(fast.next != null)
+				fast = fast.next;
+			else {
+				return null;
+			}
+		}
+		while(fast.next != null) {
+			fast = fast.next;
+			slow = slow.next;
+		}
+		return slow;
+	}
+```
+### 面试题23
+> #### 题目：链表中环的入口
+> #### 思路：1.先确定链表中是否有环。定义两个指针，一个走的快，每次走两步，另一个走的慢，一次走一步，如果两个指针能够相遇，那么链表中有环，没有相遇，则没有环；2.确定环中节点数量，两个指针相遇一定是在环中，所以相遇后再走一次，就可以得到环中节点数量；3.如果环中节点数量为k，先让第一个指针从头开始从走k步后，第二个指针从头和第一个指针一起走，相遇的节点就是环的入口
+```java
+	public ListNode meeting(ListNode pHead) {
+		if(pHead == null)
+			return null;
+		ListNode pSlow = pHead.next;
+		if(pSlow == null)
+			return null;
+		ListNode pFast = pSlow.next;
+		while(pFast != null && pSlow != null) {
+			if(pFast == pSlow)
+				return pFast;
+			pSlow = pSlow.next;
+			pFast = pFast.next;
+			if(pFast != null)
+				pFast = pFast.next;
+		}
+		return null;
+	}
+	public ListNode loop(ListNode pHead) {
+		ListNode meetingNode = meeting(pHead);
+		if(meetingNode == null)
+			return null;
+		//得到环中节点的数量
+		int nodesInLoop = 1;
+		ListNode pNode1 = meetingNode;
+		while(pNode1.next != meetingNode) {
+			pNode1 = pNode1.next;
+			nodesInLoop++;
+		}
+		//先移动pNode1，次数为环中节点的数目
+		pNode1 = pHead;
+		for(int i=0; i<nodesInLoop; i++) {
+			pNode1 = pNode1.next;
+		}
+		ListNode pNode2 = pHead;
+		while(pNode1 != pNode2) {
+			pNode1 = pNode1.next;
+			pNode2 = pNode2.next;
+		}
+		return pNode1;
+	}
+```
+### 面试题24
+> #### 题目：翻转链表
+> #### 思路：遍历到的节点的next指针，指向前一个节点，为了防止改变next后无法找到下一个节点，所以先提前存储好下一个节点的信息，在转换next指针
+```java
+	public ListNode reverse(ListNode pHead) {
+		if(pHead == null)
+			return null;
+		ListNode pReverseHead = null;
+		ListNode pNode = pHead;
+		ListNode pPrev = null;
+		while(pNode != null) {
+			ListNode pNext = pNode.next;
+			if(pNext == null) 
+				pReverseHead = pNode;
+			pNode.next = pPrev;
+			pPrev = pNode;
+			pNode = pNext;
+		}
+		return pReverseHead;
+	}
+```
