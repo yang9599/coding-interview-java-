@@ -333,3 +333,64 @@
 		return pReverseHead;
 	}
 ```
+### 面试题25
+> #### 题目：合并两个排序的链表
+> #### 思路：如下图所示，两个链表，各定义一个指针遍历，比较两个指针当前位置的数字大小，小的放入新的链表中
+
+![3-25](/pictures/3-25.png)
+
+```java
+	public ListNode merge(ListNode pHead1, ListNode pHead2) {
+		if(pHead1 == null)
+			return pHead2;
+		if(pHead2 == null)
+			return pHead1;
+		
+		ListNode mergeNode = null;
+		if(pHead1.val < pHead2.val) {
+			mergeNode = pHead1;
+			mergeNode.next = merge(pHead1.next, pHead2);
+		}
+		else {
+			mergeNode = pHead2;
+			mergeNode.next = merge(pHead1, pHead2.next);
+		}
+		return mergeNode;
+	}
+```
+### 面试题26
+> #### 题目：树的子结构
+> #### 思路：1.在树A中找到和树B的根节点的值一样的节点R；2.判断树A中以R为根节点的子树是不是包含和树B一样的结构
+```java
+	public static boolean Equal(double num1, double num2) {
+		if(Math.abs(num1-num2)<0.0000001)
+			return true;
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean DoesTree1HaveTree2(BinaryTreeNode pRoot1, BinaryTreeNode pRoot2) {
+		//约定空树是任意一个树的子结构
+		if(pRoot2 == null) 
+			return true;
+		if(pRoot1 == null)
+			return false;
+		if(!Equal(pRoot1.m_dbValue, pRoot2.m_dbValue))
+			return false;
+		return(DoesTree1HaveTree2(pRoot1.m_pLeft, pRoot2.m_pLeft) && DoesTree1HaveTree2(pRoot1.m_pRight, pRoot2.m_pRight));
+	}
+	
+	public static boolean HasSubtree(BinaryTreeNode pRoot1, BinaryTreeNode pRoot2) {
+		boolean result = false;
+		if(pRoot1 != null && pRoot2 != null) {
+			if(Equal(pRoot1.m_dbValue, pRoot2.m_dbValue))
+				result = DoesTree1HaveTree2(pRoot1, pRoot2);
+			if(!result)
+				result = HasSubtree(pRoot1.m_pLeft, pRoot2);
+			if(!result)
+				result = HasSubtree(pRoot1.m_pRight, pRoot2);
+		}
+		return result;
+	}
+```
