@@ -29,7 +29,7 @@
 > #### 思路：首先选取数组中右上角的数字。如果该数字等于要查找的数字，则查找过程结束；如果该数字大于要查找的数字，则剔除这个数字所在的列；
 如果该数字小于要查找的数字，则剔除这个数字所在行
 
-![2.4](pictures//2-4.png)
+![2.4](pictures/2-4.png)
 
 ```java
 	public static boolean find(int[][] array, int number) {
