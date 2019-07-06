@@ -23,7 +23,7 @@ public class matchRegularExpression {
 			 return false;
 		 //若pattern的第二个字符是'*'
 		 if(pindex+1 < pattern.length && pattern[pindex+1] == '*') {
-			 if(sindex != str.length && pattern[pindex] == str[pindex] || 
+			 if(sindex != str.length && pattern[pindex] == str[sindex] || 
 					 sindex != str.length && pattern[pindex] == '.')
 				 return matchIndex(str, sindex+1, pattern, pindex+2) || 
 						 matchIndex(str, sindex, pattern, pindex+2) ||
