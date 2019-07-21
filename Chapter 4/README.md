@@ -112,6 +112,10 @@
 > #### 题目：包含min函数的栈
 > #### 思路：定义两个栈，一个数据栈存放入的值。另一个辅助栈存最小值。
 ```java
+	//数据栈
+	Stack<Integer> stack1 = new Stack<>();
+	//辅助栈，存在每次push后的最小值
+	Stack<Integer> stack2 = new Stack<>();
 	public void push(int node) {
 		stack1.push(node);
 		if(stack2.isEmpty())
