@@ -127,7 +127,7 @@
 	private static void depth(TreeNode root, int depth, ArrayList<ArrayList<Integer>> list) {
 		if(root==null)
 			return;
-		if(depth > list.size())
+		if(depth > list.size()) //空节点
 			list.add(new ArrayList<Integer>());
 		list.get(depth-1).add(root.val);
 		
@@ -137,7 +137,7 @@
 ```
 ### 面试题8
 > #### 题目：二叉树的下一个节点
-> #### 思路：前序遍历和中序遍历序列中确定左、右子树的子序列
+> #### 思路：前序遍历和中序遍历序列中确定左、右子树的子序列。（树中除了有左右子节点的指针，还有一个指向父节点的指针）
 ```java
 	public static class Node{
 		int val;
@@ -146,9 +146,6 @@
 		Node parent;
 		public Node() {
 			
-		}
-		public Node(int val) {
-			this.val = val;
 		}
 		public Node(int val, Node parent) {
 			this.val = val;
@@ -159,12 +156,15 @@
 		if(pNode==null)
 			return null;
 		Node pNext = null;
+		//如果一个节点有右子树，那么它的下一个节点就是它的右子树的最左子节点。
 		if(pNode.right != null) {
 			Node pRight = pNode.right;
-			while(pRight != null)
+			while(pRight.left != null)
 				pRight = pRight.left;
 			pNext = pRight;
 		}
+		//如果节点没有右节点：1.如果它是父节点的左子树，那么下一个节点就是父节点；
+		//2.如果它是父节点的右子树，那么只能沿着指向父节点的指针一直向上遍历，直到找到一个是它父节点的左子节点的节点。如果这样的节点存在的话，那么这个节点的父节点就是我们要找的下一个节点。
 		else if(pNode.parent != null){
 			Node pCurrent = pNode;
 			Node pParent = pNode.parent;
