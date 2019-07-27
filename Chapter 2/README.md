@@ -90,7 +90,7 @@
 ```
 ### 面试题7
 > #### 题目：重建二叉树
-> #### 思路：前序遍历和中序遍历序列中确定左、右子树的子序列
+> #### 思路：前序遍历和中序遍历序列中确定左、右子树的子序列。前序遍历序列中，第一个数字是根节点的值。中序遍历序列中，根节点左边是左子树的值，右边是右子树的值。
 ```java
 	public static TreeNode construct(int[] preorder, int[] inorder) {
 		if(preorder==null || inorder==null)
