@@ -17,11 +17,11 @@ public class BinaryTreeNode_GetNext {
 	}
 	public static Node getNext(Node pNode) {
 		if(pNode==null)
-			return(null);
+			return null;
 		Node pNext = null;
 		if(pNode.right != null) {
 			Node pRight = pNode.right;
-			while(pRight != null)
+			while(pRight.left != null)
 				pRight = pRight.left;
 			pNext = pRight;
 		}
@@ -34,6 +34,6 @@ public class BinaryTreeNode_GetNext {
 			}
 			pNext = pParent;
 		}
-		return(pNext);
+		return pNext;
 	}
 }
