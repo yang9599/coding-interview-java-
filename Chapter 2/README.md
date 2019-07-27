@@ -21,7 +21,7 @@
 		for(int i=0;i<arr.length;i++) {
 			set.add(arr[i]);
 		}
-		return(set.toArray());
+		return set.toArray();
 	}
 ```
 ### 面试题4
