@@ -66,7 +66,6 @@
 			else
 				str_re.append(str.charAt(i));
 		}
-		System.out.println(str_re);
 		return true;
 	}
 ```
