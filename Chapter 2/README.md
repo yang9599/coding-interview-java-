@@ -85,7 +85,6 @@
 		while(!stack.isEmpty()) {
 			list.add(stack.pop().val);
 		}
-		System.out.println(list);
 		return list;
 	}
 ```
