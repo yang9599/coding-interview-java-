@@ -164,7 +164,8 @@
 			pNext = pRight;
 		}
 		//如果节点没有右节点：1.如果它是父节点的左子树，那么下一个节点就是父节点；
-		//2.如果它是父节点的右子树，那么只能沿着指向父节点的指针一直向上遍历，直到找到一个是它父节点的左子节点的节点。如果这样的节点存在的话，那么这个节点的父节点就是我们要找的下一个节点。
+		//2.如果它是父节点的右子树，那么只能沿着指向父节点的指针一直向上遍历，直到找到一个是它父节点的左子节点的节点。
+		//如果这样的节点存在的话，那么这个节点的父节点就是我们要找的下一个节点。
 		else if(pNode.parent != null){
 			Node pCurrent = pNode;
 			Node pParent = pNode.parent;
@@ -206,7 +207,25 @@
 ```
 ### 面试题10
 > #### 题目：斐波那契数列
-> #### 思路：用数学归纳法总结公式
+> #### 思路1：普通递归
+```java
+	int Fibonacci(int n){
+		if(n==0)
+			return 0;
+		if(n==1)
+			return 1;
+		int fib1 = 1;
+		int fib2 = 0;
+		int fib = 0;
+		for(int i=2; i<n; i++){
+			fib = fib1+fib2;
+			fib2 = fib1;
+			fib1 = fib;
+		}
+		return fib;
+	}
+```
+> #### 思路2：用数学归纳法总结公式
 ```java
 	private static final int[][] UNIT = {{1, 1}, {1, 0}};
 	private static final int[][] ZERO = {{0, 0}, {0, 0}};
@@ -227,14 +246,14 @@
 				}
 			}
 		}
-		return(r);
+		return r;
 	}
 	
 	public static int[][] calculate_Fibonaci(int n){
 		if(n == 0)
-			return(ZERO);
+			return ZERO;
 		if(n == 1)
-			return(UNIT);
+			return UNIT;
 		if(n % 2 == 0) {
 			 int[][] matrix = calculate_Fibonaci(n >> 1);
 			 return(matrixMultiple(matrix, matrix));
@@ -264,14 +283,16 @@
 			 *则只能按照顺序查找
 			 */
 			if(arr[index1] == arr[index2]&&arr[indexMid]==arr[index1]) {
-				return(MinInOrder(arr, index1, index2));
+				return MinInOrder(arr, index1, index2);
 			}
+			//中间指针的数字如果大于第一个指针指向的数字，那么中间指针的数字一定在第一个递增子数组中
 			if(arr[indexMid] >= arr[index1])
 				index1 = indexMid;
+			//中间指针的数字如果小于第二个指针指向的数字，那么中间指针的数字一定在第二个递增子数组中
 			else if(arr[indexMid] <= arr[index2])
 				index2 = indexMid;
 		}
-		return(arr[indexMid]);
+		return arr[indexMid];
 	}
 	public static int MinInOrder(int[] arr, int index1, int index2) {
 		int min = arr[index1];
@@ -279,34 +300,35 @@
 			if(min > arr[i])
 				min = arr[i];
 		}
-		return(min);
+		return min;
 	}
 ```
 ### 面试题12
 > #### 题目：矩阵中的路径
-> #### 思路：回溯法
+> #### 思路：回溯法。
 ```java
 	public static boolean findPath(char[][] matrix, char[] str) {
 		if(matrix==null || str==null)
-			return(false);
+			return false;
+		//标识路径是否已经进入了每个格子
 		boolean[] visited = new boolean[matrix.length * matrix[0].length];
 		for(int i=0; i<visited.length; i++)
 			visited[i] = false;
-		int pathLength = 0;
+		int pathLength = 0; //定位字符串中的下标
 		for(int row=0; row<matrix.length; row++) {
 			for(int col=0; col<matrix[0].length; col++) {
 				if(hasPathCore(matrix, row, col, str, pathLength, visited))
-					return(true);
+					return true;
 			}
 		}
-		return(false);
+		return false;
 	}
 	
 	public static boolean hasPathCore(char[][] matrix, int row, int col, 
 			char[] str, int pathLength, boolean[] visited) {
 		
 		if(str.length == pathLength) {
-			return(true);
+			return true;
 		
 		}
 		boolean hasPath = false;
@@ -325,7 +347,7 @@
 				visited[row*matrix[0].length+col] = false;
 			}
 		}
-		return(hasPath);
+		return hasPath;
 	}
 ```
 ### 面试题13
@@ -334,13 +356,13 @@
 ```java
 	int movingCount(int threshold, int rows, int cols) {
 		if(threshold<0 || rows <= 0 || cols <= 0)
-			return(-1);
+			return -1;
 		boolean[] visited = new boolean[rows*cols];
 		for(int i=0; i<rows*cols; ++i) {
 			visited[i] = false;
 		}
 		int count = movingCountCore(threshold, rows, cols, 0, 0, visited);
-		return(count);
+		return count;
 	}
 	int movingCountCore(int threshold, int rows, int cols, 
 			int row, int col, boolean[] visited) {
@@ -352,16 +374,16 @@
 					movingCountCore(threshold, rows, cols, row+1, col, visited)+
 					movingCountCore(threshold, rows, cols, row, col+1, visited);
 		}
-		return(count);
+		return count;
 	}
 	
 	boolean check(int threshold, int rows, int cols, 
 			int row, int col, boolean[] visited) {
 		if(row>=0 && row<rows && col>=0 && col<cols && getDigitSum(row)+getDigitSum(col)<=threshold &&
 				!visited[row*cols+col]) {
-			return(true);
+			return true;
 		}
-		return(false);
+		return false;
 	}
 	int getDigitSum(int number) {
 		int sum = 0;
@@ -369,7 +391,7 @@
 			sum += number % 10;
 			number /= 10;
 		}
-		return(sum);
+		return sum;
 	}
 ```
 ### 面试题14
