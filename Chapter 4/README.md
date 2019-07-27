@@ -68,7 +68,7 @@
 
 ### 面试题29
 > #### 题目：顺时针打印矩阵
-> #### 思路：终止行号大于起始行号，终止列号大于起始列号
+> #### 思路：终止行号大于起始行号，终止列号大于起始列号。
 ```java
 	public ArrayList<Integer> printMatrixClockwisely(int[][] number){
 		ArrayList<Integer> list = new ArrayList<>();
@@ -77,6 +77,10 @@
 		int start = 0;
 		int rows = number.length;
 		int cols = number[0].length;
+		
+		// 对于一个5*5的矩阵而言，最后一圈只有一个数字，对应的坐标为(2,2)，我们发现5>2*2。
+		//对于6*6的矩阵而言，最后一圈有4个数字，其左上角的坐标仍然为(2,2)。我们发现6>2*2仍然成立。
+		//于是得出结论，让循环继续的条件是columns>startX*2并且rows>startY*2
 		while(cols > start*2 && rows > start*2) {
 			printMatrixInCircle(number, start, list);
 			start++;
