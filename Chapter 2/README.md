@@ -34,7 +34,7 @@
 	public static boolean find(int[][] array, int number) {
 		boolean f = false;
 		if(array==null)
-			return(f);
+			return f;
 		int row = 0;
 		int column = array[0].length-1;
 		while(row<array.length && column>=0) {
@@ -47,7 +47,7 @@
 			else
 				row++;
 		}
-		return(f);
+		return f;
 	}
 ```
 ### 面试题5
@@ -56,7 +56,7 @@
 ```java
 	public static boolean ReplaceSpace(StringBuffer str) {
 		if(str==null)
-			return(false);
+			return false;
 		
 		StringBuffer str_re = new StringBuffer();
 		int i = 0;
@@ -67,7 +67,7 @@
 				str_re.append(str.charAt(i));
 		}
 		System.out.println(str_re);
-		return(true);
+		return true;
 	}
 ```
 ### 面试题6
@@ -77,7 +77,7 @@
 	public static ArrayList<Integer> printList(ListNode node){
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		if(node==null)
-			return(list);
+			return list;
 		Stack<ListNode> stack = new Stack<ListNode>();
 		while(node != null) {
 			stack.push(node);
@@ -87,7 +87,7 @@
 			list.add(stack.pop().val);
 		}
 		System.out.println(list);
-		return(list);
+		return list;
 	}
 ```
 ### 面试题7
@@ -96,11 +96,11 @@
 ```java
 	public static TreeNode construct(int[] preorder, int[] inorder) {
 		if(preorder==null || inorder==null)
-			return(null);
+			return null;
 		if(preorder.length==0 || inorder.length==0)
-			return(null);
+			return null;
 		if(preorder.length != inorder.length)
-			return(null);
+			return null;
 		TreeNode root = new TreeNode(preorder[0]);
 		for(int i=0; i<preorder.length; i++) {
 			if(preorder[0] == inorder[i]) {
@@ -110,14 +110,14 @@
 						Arrays.copyOfRange(inorder, i+1, inorder.length));
 			}
 		}
-		return(root);
+		return root;
 	}
 	
 	//按层打印二叉树
 	public static void Print(TreeNode pRoot){
 		ArrayList<ArrayList<Integer>> list = new ArrayList<>();
 		depth(pRoot, 1, list);
-		System.out.println(list);
+		System.out.println list;
 	}
 	
 	//用递归，二叉树遍历
@@ -154,7 +154,7 @@
 	}
 	public static Node getNext(Node pNode) {
 		if(pNode==null)
-			return(null);
+			return null;
 		Node pNext = null;
 		if(pNode.right != null) {
 			Node pRight = pNode.right;
@@ -171,7 +171,7 @@
 			}
 			pNext = pParent;
 		}
-		return(pNext);
+		return pNext;
 	}
 ```
 ### 面试题9
