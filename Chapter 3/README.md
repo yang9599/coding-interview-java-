@@ -12,14 +12,9 @@
 	}
 	
 	public static double multiply(double base, int exponent) {
-		if(exponent == 0)
-			return 1;
-		if(exponent == 1)
-			return base;
-		
-		double result = multiply(base, exponent >> 1);
+		double result = multiply(base, exponent >> 1); //用右移运算符代替了除以2
 		result *= result;
-		if((exponent & 0x1) == 1)
+		if((exponent & 0x1) == 1) //用位与运算符代替了求余运算符（%）
 			result *= base;
 		return result;
 	}
@@ -32,12 +27,14 @@
 		
 		if(exponent == 0)
 			return 1;
-		
+		if(exponent == 1)
+			return base;
+			
 		if(exponent > 0) {
 			res = multiply(base, exponent);
 		}
 		else {
-			res = multiply(1/base, Math.abs(exponent));
+			res = multiply(1/base, -exponent);
 		}
 		return res;
 	}
@@ -79,7 +76,7 @@
 	}
 ```
 ### 面试题18
-> #### 题目：删除链表的节点
+> #### 题目1：删除链表的节点
 > #### 思路：把要删除节点的下一个节点的内容复制到需要删除的节点上覆盖原有的内容，再把下一个节点删除，如下图所示
 
 ![2-18](/pictures/2-18.png)
@@ -108,7 +105,9 @@
 			}
 		}
 	}
-	
+```
+> #### 题目2：删除链表中重复的节点
+```java
 	//删除链表中的重复节点
 	public ListNode deleteDuplication(ListNode pHead) {
 		if(pHead == null )
@@ -187,8 +186,8 @@
 		if(str == null)
 			return false;
 		int index = 0;
-		int ecount = 0;
-		int point = 0;
+		int ecount = 0; //记录e和E出现的次数
+		int point = 0; //记录.出现的次数
 		//第一个字符是正负号就直接跳过
 		if(str[0]=='-' || str[0]=='+')
 			index++;
@@ -271,13 +270,14 @@
 > #### 题目：链表中环的入口
 > #### 思路：1.先确定链表中是否有环。定义两个指针，一个走的快，每次走两步，另一个走的慢，一次走一步，如果两个指针能够相遇，那么链表中有环，没有相遇，则没有环；2.确定环中节点数量，两个指针相遇一定是在环中，所以相遇后再走一次，就可以得到环中节点数量；3.如果环中节点数量为k，先让第一个指针从头开始从走k步后，第二个指针从头和第一个指针一起走，相遇的节点就是环的入口
 ```java
+	//判断是否链表中存在环
 	public ListNode meeting(ListNode pHead) {
 		if(pHead == null)
 			return null;
-		ListNode pSlow = pHead.next;
+		ListNode pSlow = pHead.next; //定义慢指针
 		if(pSlow == null)
 			return null;
-		ListNode pFast = pSlow.next;
+		ListNode pFast = pSlow.next; //定义快指针
 		while(pFast != null && pSlow != null) {
 			if(pFast == pSlow)
 				return pFast;
@@ -360,6 +360,7 @@
 ```
 ### 面试题26
 > #### 题目：树的子结构
+> #### 题目描述：输入两棵二叉树A和B，判断B是不是A的子结构
 > #### 思路：1.在树A中找到和树B的根节点的值一样的节点R；2.判断树A中以R为根节点的子树是不是包含和树B一样的结构
 ```java
 	public static boolean Equal(double num1, double num2) {
