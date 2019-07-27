@@ -202,7 +202,7 @@
 				stack2.push(stack1.pop());
 			}
 		}
-		return(stack2.pop());
+		return stack2.pop();
 	}
 ```
 ### 面试题10
@@ -234,7 +234,7 @@
 	public static int[][] matrixMultiple(int[][] m, int[][] n) {
 		//矩阵m的列数不等于矩阵n的行数，两个矩阵无法相乘
 		if(m[0].length != n.length)
-			return(null);
+			return null;
 		int row = m.length;
 		int column = n[0].length;
 		int[][] r = new int[row][column];
@@ -259,7 +259,7 @@
 			 return(matrixMultiple(matrix, matrix));
 			}
 		int[][] matrix = calculate_Fibonaci((n-1) >> 1);
-		return(matrixMultiple(matrixMultiple(matrix, matrix), UNIT));
+		return matrixMultiple(matrixMultiple(matrix, matrix), UNIT);
 
 	}
 ```
@@ -269,7 +269,7 @@
 ```java
 	public static int FindMin(int[] arr) {
 		if(arr==null)
-			return(-1);
+			return -1;
 		int index1 = 0;
 		int index2 = arr.length-1;
 		int indexMid = index1;
@@ -403,11 +403,11 @@
 	//动态规划
 	public static int Cutting1(int length) {
 		if(length < 2)
-			return(0);
+			return 0;
 		if(length == 2)
-			return(1);
+			return 1;
 		if(length == 3)
-			return(2);
+			return 2;
 		int[] products = new int[length+1];
 		products[0] = 0;
 		products[1] = 1;
@@ -425,23 +425,24 @@
 			}
 		}
 		max = products[length];
-		return(max);
+		return max;
 	}
 	
 	//贪婪算法
+	//当length大于等于5时，尽可能多地剪长度为3的绳子；当剩下的绳子长度为4时，把绳子剪成两段长度为2的绳子。
 	public static int Cutting2(int length) {
 		if(length < 2)
-			return(0);
+			return 0;
 		if(length == 2)
-			return(1);
+			return 1;
 		if(length == 3)
-			return(2);
+			return 2;
 		
 		int timesOf3 = length / 3;
 		if(length - timesOf3 * 3 == 1)
 			timesOf3 -= 1;
 		int timesOf2 = (length - timesOf3 * 3) / 2;
-		return((int)(Math.pow(3, timesOf3)*(int)(Math.pow(2, timesOf2))));
+		return (int)(Math.pow(3, timesOf3)*(int)(Math.pow(2, timesOf2)));
 	}
 ```
 ### 面试题15
@@ -450,12 +451,12 @@
 ```java
 	public static int method2(int n) {
 		if(n == 0)
-			return(0);
+			return 0;
 		int count = 0;
 		while(n != 0) {
 			n = n & (n-1);
 			count++;
 		}
-		return(count);
+		return count;
 	}
 ```
