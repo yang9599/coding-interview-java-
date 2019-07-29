@@ -145,6 +145,7 @@
 
 ### 面试题31
 > #### 题目：栈的压入、弹出序列
+> #### 题目描述：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。
 > #### 思路：用栈来压入弹出元素，相等则出栈。
 ```java
 	public boolean IsPopOrder(int[] pushA, int[] popA) {
@@ -190,6 +191,7 @@
 ```
 ### 面试题33
 > #### 题目：二叉搜索树的后序遍历序列
+> #### 题目描述：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回true，否则返回false。
 > #### 思路：区分开左右子树，然后分别进行左右子树递归处理
 ```java
 	public boolean VerifySequenceOfBST(int[] sequence) {
@@ -198,7 +200,7 @@
 			return false;
 		int root = sequence[len-1];
 		int  rstart = 0;
-		
+		// 判断左子树的数量，然后可以直接从sequence中区分开
 		for(int i=0; i<len-1; i++) {
 			if(sequence[i] < root)
 				rstart++;
@@ -208,6 +210,7 @@
 			VerifySequenceOfBST(Arrays.copyOfRange(sequence, 0, len-1));
 		}
 		else {
+			//判断右子树中是否存在大于根节点值的数值，如果存在，则这不是二叉搜索树
 			for(int i=rstart; i<len-1; i++) {
 				if(sequence[i] <= root)
 					return false;
@@ -220,6 +223,7 @@
 ```
 ### 面试题34
 > #### 题目：二叉树中和为某一值的路径
+> #### 题目描述：输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
 > #### 思路：根据路径的定义，选择树的先序遍历作为流程框架。动态保存根节点到当前节点的path。若当前节点为叶子节点，则判断路径和是否为给定的整数值。直到树的遍历结束。
 ```java
 	private ArrayList<ArrayList<Integer>> listAll = new ArrayList<ArrayList<Integer>>();
@@ -233,13 +237,14 @@
 			listAll.add(new ArrayList<Integer>(list));
 		FindPath(root.left, target);
 		FindPath(root.right, target);
-		list.remove(list.size()-1);
+		list.remove(list.size()-1);//回溯
 		return listAll;
 		
 	}
 ```
 ### 面试题35
 > #### 题目：复杂链表的复制
+> #### 题目说明：在复杂链表中，每个节点除了有一个m_pNext指针指向下一个节点，还有一个m_pSibling指针指向链表中的任意节点或者nullptr。
 > #### 思路：1.根据原始链表的每个节点N创建对应的N’；2.设置复制出来的节点的m_pSibling；3.把这个长链表拆分成两个链表。
 ```java
 	public class ComplexListNode{
@@ -306,6 +311,7 @@
 ```
 ### 面试题36
 > #### 题目：二叉搜索树与双向链表
+> #### 题目描述：输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
 > #### 思路：定义一个链表的尾节点，递归处理左右子树，最后返回链表的头节点
 ```java
 	public BinaryTreeNode Convert(BinaryTreeNode pRootOfTree) {
@@ -333,6 +339,7 @@
 ```
 ### 面试题37
 > #### 题目：序列化二叉树
+> #### 题目描述：实现两个函数，分别用来序列化和反序列化二叉树。
 > #### 思路：序列化：前序遍历二叉树存入字符串中；反序列化：根据前序遍历重建二叉树。
 ```java
 	public String Serialize(BinaryTreeNode root) {
