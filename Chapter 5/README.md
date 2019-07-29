@@ -4,7 +4,7 @@
 ```java
 	public int MoreThanHalfNum(int[] numbers) {
 		if(numbers == null)
-			return -9999;
+			return -1;
 		int result = numbers[0];
 		int times = 1;
 		for(int i=1; i<numbers.length; i++) {
@@ -27,7 +27,7 @@
 		if(sum*2 > numbers.length)
 			return result;
 		else 
-			return -9999;
+			return -1;
 	}
 ```
 ### 面试题40
