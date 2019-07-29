@@ -340,8 +340,10 @@
 ### 面试题37
 > #### 题目：序列化二叉树
 > #### 题目描述：实现两个函数，分别用来序列化和反序列化二叉树。
+> #### 题目说明：序列化是指遍历到nullptr节点时，化为一个特殊的字符，例如‘$’。另外，节点的数值之间要用一个特殊字符隔开，例如‘,’。
 > #### 思路：序列化：前序遍历二叉树存入字符串中；反序列化：根据前序遍历重建二叉树。
 ```java
+	//序列化，使用递归操作
 	public String Serialize(BinaryTreeNode root) {
 		StringBuffer sb = new StringBuffer();
 		if(root == null) {
@@ -353,6 +355,7 @@
 		sb.append(Serialize(root.m_pRight));
 		return sb.toString();
 	}
+	//
 	public int index = -1;
 	public BinaryTreeNode Deserialize(String str) {
 		index++;
@@ -372,6 +375,7 @@
 ```
 ### 面试题38
 > #### 题目：字符串的排列
+> #### 题目描述：输入一个字符串，打印该字符串中字符的所有排列。
 > #### 思路：用递归拿第一个字符和后面的字符逐个交换
 ````java
 	public ArrayList<String> Permutation(char[] str) {
