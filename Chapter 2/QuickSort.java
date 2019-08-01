@@ -13,7 +13,7 @@ public class QuickSort {
 			arr[end] = arr[start];
 		}
 		arr[start] = key;
-		return(start);
+		return start;
 	}
 	public static int[] quickSort(int[] arr, int start, int end) {
 		if(start < end) {
@@ -21,7 +21,7 @@ public class QuickSort {
 			quickSort(arr, start, index-1);
 			quickSort(arr, index+1, end);
 		}
-		return(arr);
+		return arr;
 	}
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
