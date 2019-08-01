@@ -34,7 +34,41 @@
 ### 面试题40
 > #### 题目：最小的k个数
 > #### 题目描述：输入n个整数，找出其中最小的k个数。
-> #### 思路：先将前K个数放入数组，进行堆排序，若之后的数比它还小，将数组中的最大的数与之后比它小的数进行调整
+> #### 思路1：如果基于数组的k个数字来调整，则使得比第k个数字小的所有数字都位于数组的左边，比第k个数字大的所有数字都位于数组的右边。这样调整后，位于数组中左边的k个数字就是最小的k个数字（这k个数字不一定是排序的）。
+```java
+	private static int Partition(int[] arr, int start, int end) {
+		int key = arr[start];
+		while(start < end) {
+			while(arr[end] >= key && end > start)
+				end--;
+			arr[start] = arr[end];
+			while(arr[start] <= key && end > start)
+				start++;
+			arr[end] = arr[start];
+		}
+		arr[start] = key;
+		return start;
+	}	
+	public static void GetLeastNumbers2(int[] input, int k) {
+		int len = input.length;
+		if(input==null || k>len || len<=0 || k<=0)
+			return;
+		int start = 0;
+		int end = len-1;
+		int index = Partition(input, start, end);
+		while(index != k-1) {
+			if(index > k-1) {
+				end = index-1;
+				index = Partition(input, start, end);
+			}
+			else {
+				start = index+1;
+				index = Partition(input, start, end);
+			}
+		}
+	}
+```
+> #### 思路2：先将前K个数放入数组，进行堆排序，若之后的数比它还小，将数组中的最大的数与之后比它小的数进行调整。时间复杂度nlogk
 ```java
 	public ArrayList<Integer> GetLeastNumbers(int[] input, int k) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
