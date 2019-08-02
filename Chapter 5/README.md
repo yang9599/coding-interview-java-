@@ -49,7 +49,7 @@
 		arr[start] = key;
 		return start;
 	}	
-	public static void GetLeastNumbers2(int[] input, int k) {
+	public static void GetLeastNumbers(int[] input, int k) {
 		int len = input.length;
 		if(input==null || k>len || len<=0 || k<=0)
 			return;
