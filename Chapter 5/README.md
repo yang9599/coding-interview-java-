@@ -257,12 +257,13 @@
 ```
 ### 面试题46
 > #### 题目：把数组翻译成字符串
+> #### 题目描述：给定一个数字，我们按照如下规则把它翻译成字符串：0翻译成“a”，1翻译成“b”，...，11翻译成“l”，...，25翻译成“z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
 > #### 思路：可以选一个数字或两个连续的数字（10~25）翻译成一个字符。 
 ```java
 public class NumberToString {
 	public int GetTranslationCount(int number) {
 		if(number <= 0)
-			return -9999;
+			return 0;
 		return GetTranslationCount(String.valueOf(number));
 	}
 	public int GetTranslationCount(String number) {
@@ -293,6 +294,7 @@ public class NumberToString {
 ```
 ### 面试题47
 > #### 题目：礼物的最大价值
+> #### 题目描述：在一个 m*n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值。你可以从棋盘的左上角开始拿格子的礼物，并每次向右或者向下移动一格，直到到达棋盘的右下角。给定一个棋盘极其上面的礼物，请计算你最多能拿到多少价值的礼物？
 > #### 思路：动态规划 f(i,j)=max(f(i-1,j),f(i,j-1)+gift[i,j])
 ```java
 	public int getMaxValue(int[][] values) {
