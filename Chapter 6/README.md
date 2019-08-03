@@ -1,5 +1,6 @@
 ### 面试题53
 > #### 题目1：数字在排序数组中出现的次数
+> #### 题目1描述：统计一个数字在排序数组中出现的次数。
 > #### 思路：二分法遍历统计
 ```java
 	public int GetNumberOfK(int[] data, int k) {
@@ -19,6 +20,7 @@
 		}
 		else if(k > data[mid])
 			result += GetNumberOfK(Arrays.copyOfRange(data, mid, data.length), k);
+		//如果中间的数正好等于k的话，要从中间向前后两个方向分别遍历，直到有个数不等于k
 		else {
 			for(int i=mid; i<data.length; i++) {
 				if(data[i] == k)
@@ -39,6 +41,7 @@
 	}
 ```
 > #### 题目2：0~n-1中缺失的数字
+> #### 题目2描述：一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0到n-1之间。在范围0到n-1内的n个数字中有且只有一个数字不在该数组中。请找出这个数字。
 > #### 思路：二分法遍历统计
 ```java
 	public int GetMissingNumber(int[] numbers) {
