@@ -29,7 +29,8 @@ public class Power {
 		
 		if(exponent == 0)
 			return 1;
-		
+		if(exponent == Integer.MIN_VALUE) //考虑到最小值边界条件
+        		res = 1/bse*pow(1/base, Integer.MAX_VALUE);
 		if(exponent > 0) {
 			res = multiply(base, exponent);
 		}
