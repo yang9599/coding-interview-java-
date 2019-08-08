@@ -13,6 +13,10 @@
 	}
 	
 	public static double multiply(double base, int exponent) {
+		if(exponent == 0)
+			return 1;
+		if(exponent == 1)
+			return base;
 		double result = multiply(base, exponent >> 1); //用右移运算符代替了除以2
 		result *= result;
 		if((exponent & 0x1) == 1) //用位与运算符代替了求余运算符（%）
@@ -25,12 +29,8 @@
 		if(equal(base, 0.0)) {
 			return 0;
 		}
-		
-		if(exponent == 0)
-			return 1;
-		if(exponent == 1)
-			return base;
-			
+		if(exponent == Integer.MIN_VALUE) //考虑到最小值边界条件
+        		res = 1/base*pow(1/base, Integer.MAX_VALUE);	
 		if(exponent > 0) {
 			res = multiply(base, exponent);
 		}
