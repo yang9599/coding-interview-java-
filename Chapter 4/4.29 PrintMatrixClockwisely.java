@@ -7,7 +7,11 @@ public class PrintMatrix {
 			return list;
 		int start = 0;
 		int rows = number.length;
-		int cols = number[0].length;
+		if(row == 0)
+        		return list;
+        	int col = matrix[0].length;
+		if(col == 0)
+			return list;
 		while(cols > start*2 && rows > start*2) {
 			printMatrixInCircle(number, start, list);
 			start++;
