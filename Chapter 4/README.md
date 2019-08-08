@@ -79,7 +79,11 @@
 			return list;
 		int start = 0;
 		int rows = number.length;
-		int cols = number[0].length;
+		if(row == 0)
+        		return list;
+        	int col = matrix[0].length;
+        	if(col == 0)
+        		return list;
 		
 		// 对于一个5*5的矩阵而言，最后一圈只有一个数字，对应的坐标为(2,2)，我们发现5>2*2。
 		//对于6*6的矩阵而言，最后一圈有4个数字，其左上角的坐标仍然为(2,2)。我们发现6>2*2仍然成立。
