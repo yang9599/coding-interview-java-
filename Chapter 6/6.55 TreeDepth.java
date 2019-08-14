@@ -35,8 +35,8 @@ public class DepthOfBinaryTree {
 		int left = TreeDepth(pRoot.m_pLeft);
 		int right = TreeDepth(pRoot.m_pRight);
 		int dif = left - right;
-		if(Math.abs(dif) <= 1)
-			return true;
+		if(Math.abs(dif) > 1)
+			return false;
 		return(IsBalanced(pRoot.m_pLeft) && IsBalanced(pRoot.m_pRight));
 	}
 
