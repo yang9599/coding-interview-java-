@@ -297,7 +297,7 @@
 		ComplexListNode pNode = pHead;
 		ComplexListNode pClonedHead = null;
 		ComplexListNode pClonedNode = null;
-		if(pNode != pHead) {
+		if(pNode != null) {
 			pClonedHead = pClonedNode = pNode.m_pNext;
 			pNode.m_pNext = pClonedNode.m_pNext;
 			pNode = pNode.m_pNext;
